@@ -1,11 +1,22 @@
-[![Build status](https://ci.appveyor.com/api/projects/status/srwru0a96rw9v7dn?svg=true)](https://ci.appveyor.com/project/StefH/linqkit)
+### Build
+| | |
+|-|-|
+| AppVeyor | [![AppVeyor](https://ci.appveyor.com/api/projects/status/srwru0a96rw9v7dn?svg=true)](https://ci.appveyor.com/project/StefH/linqkit)
+| Github Actions | [![Actions](https://github.com/scottksmith95/LINQKit/workflows/Main%20workflow/badge.svg)](https://github.com/scottksmith95/LINQKit/actions?query=workflow%3A%22Main+workflow%22) |
 
-| Project | NuGet | Dependency | Frameworks |
+
+### Projects
+
+| Package | NuGet | Dependency | Frameworks |
 | ------- | ----- | -----------| ---------- | 
-| LinqKit | [![NuGet Badge](https://buildstats.info/nuget/LinqKit)](https://www.nuget.org/packages/LinqKit) | EntityFramework | <ul><li>net45 and up</li></ul> |
-| LinqKit.Core | [![NuGet Badge](https://buildstats.info/nuget/LinqKit.Core)](https://www.nuget.org/packages/LinqKit.Core) | | <ul><li>net35</li><li>net40</li><li>net45 and up</li><li>.NETPortable Profile 259</li><li>.NETPortable Profile 328</li><li>netstandard1.3</li><li>netstandard2.0</li><li>uap10</li></ul>|
-| LinqKit.EntityFramework | [![NuGet Badge](https://buildstats.info/nuget/LinqKit.EntityFramework)](https://www.nuget.org/packages/LinqKit.EntityFramework) | EntityFramework | <ul><li>net45 and up</li></ul> |
-| LinqKit.Microsoft.EntityFrameworkCore | [![NuGet Badge](https://buildstats.info/nuget/LinqKit.Microsoft.EntityFrameworkCore)](https://www.nuget.org/packages/LinqKit.Microsoft.EntityFrameworkCore) | EntityFrameworkCore | <ul><li>net451 and up</li><li>netstandard1.3</li><li>netstandard2.0</li></ul>|
+| LinqKit | [![Nuget](https://img.shields.io/nuget/v/LinqKit) ![Nuget](https://img.shields.io/nuget/dt/LinqKit)](https://www.nuget.org/packages/LinqKit) | EntityFramework<ul><li>≥ 6.2.0 (net45)</li><li>≥ 6.3.0 (netstandard2.1)</li></ul> | <ul><li>net45 and up</li><li>netstandard2.1</li></ul> |
+| LinqKit.Core | [![Nuget](https://img.shields.io/nuget/v/LinqKit.Core) ![Nuget](https://img.shields.io/nuget/dt/LinqKit.Core)](https://www.nuget.org/packages/LinqKit.Core) | - | <ul><li>net35</li><li>net40</li><li>net45 and up</li><li>.NETPortable Profile</li><li>netstandard1.3</li><li>netstandard2.0</li><li>netstandard2.1</li><li>uap10</li></ul>|
+| LinqKit.EntityFramework | [![Nuget](https://img.shields.io/nuget/v/LinqKit.EntityFramework) ![Nuget](https://img.shields.io/nuget/dt/LinqKit.EntityFramework)](https://www.nuget.org/packages/LinqKit.EntityFramework) | EntityFramework<ul><li>≥ 6.2.0 (net45)</li><li>≥ 6.3.0 (netstandard2.1) | <ul><li>net45 and up</li><li>netstandard2.1</li></ul> |
+| LinqKit.Microsoft.EntityFrameworkCore | [![Nuget](https://img.shields.io/badge/nuget-v1.1.21-blue) ![Nuget](https://img.shields.io/nuget/dt/LinqKit.Microsoft.EntityFrameworkCore)](https://www.nuget.org/packages/LinqKit.Microsoft.EntityFrameworkCore/1.1.21) | Microsoft.EntityFrameworkCore<ul><li>≥ 1.1.1</li></ul> | <ul><li>net451</li><li>netstandard1.3</li></ul>|
+| LinqKit.Microsoft.EntityFrameworkCore | [![Nuget](https://img.shields.io/badge/nuget-v2.0.21-blue) ![Nuget](https://img.shields.io/nuget/dt/LinqKit.Microsoft.EntityFrameworkCore)](https://www.nuget.org/packages/LinqKit.Microsoft.EntityFrameworkCore/2.0.21) | Microsoft.EntityFrameworkCore<ul><li>≥ 2.0.1</li></ul> | <ul><li>netstandard2.0</li></ul> |
+| LinqKit.Microsoft.EntityFrameworkCore | [![Nuget](https://img.shields.io/badge/nuget-v3.0.21-blue) ![Nuget](https://img.shields.io/nuget/dt/LinqKit.Microsoft.EntityFrameworkCore)](https://www.nuget.org/packages/LinqKit.Microsoft.EntityFrameworkCore/3.0.21) | Microsoft.EntityFrameworkCore<ul><li>≥ 3.0.1 (netstandard2.0)</li><li>≥ 3.0.0 (netstandard2.1) | <ul><li>netstandard2.0</li><li>netstandard2.1</li></ul>|
+| LinqKit.Microsoft.EntityFrameworkCore | [![Nuget](https://img.shields.io/badge/nuget-v5.0.21-blue) ![Nuget](https://img.shields.io/nuget/dt/LinqKit.Microsoft.EntityFrameworkCore)](https://www.nuget.org/packages/LinqKit.Microsoft.EntityFrameworkCore/5.0.21) | Microsoft.EntityFrameworkCore<ul><li>≥ 5.0.0</li></ul> | <ul><li>netstandard2.1</li></ul>|
+| LinqKit.Z.EntityFramework.Classic | [![Nuget](https://img.shields.io/nuget/v/LinqKit.Z.EntityFramework.Classic) ![Nuget](https://img.shields.io/nuget/dt/LinqKit.Z.EntityFramework.Classic)](https://www.nuget.org/packages/LinqKit.Z.EntityFramework.Classic) | Z.EntityFramework.Classic<ul><li>≥ 7.0.40</li></ul> | <ul><li>net40</li><li>net45</li><li>netstandard2.0</li></ul>|
 
 
 Table of Contents
@@ -42,7 +53,7 @@ With LINQKit, you can:
 
 AsExpandable is based on a [very clever](http://tomasp.net/blog/linq-expand.aspx) project by Tomas Petricek. ExpressionVisitor comes from a [sample by Matt Warren](http://blogs.msdn.com/mattwar/archive/2007/07/31/linq-building-an-iqueryable-provider-part-ii.aspx).
 
-If you like LINQKit, consider voting for it on the Entity Framework UserVoice page (http://data.uservoice.com/forums/72025-entity-framework-feature-suggestions/suggestions/2390752-add-support-for-dynamically-extended-queries-as-pe). 
+If you like LINQKit, consider linking [this issue on github](https://github.com/aspnet/EntityFrameworkCore/issues/15670). 
 
 Plugging Expressions into EntitySets / EntityCollections: The Problem
 =======

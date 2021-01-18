@@ -1,11 +1,12 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="../../version.xml" />
 
   <PropertyGroup>
-    <Description>LinqKit.Core is a free set of extensions for LINQ to SQL and Entity Framework power users. Note that Include(...), IAsync and IDbAsync are not supported.</Description>
+    <Version>1.1.$(PatchVersion)</Version>
+    <Description>LinqKit.Core contains extensions for LINQ to SQL and Entity Framework. Note that Include(...), IAsync and IDbAsync are not supported.</Description>
     <AssemblyTitle>LinqKit.Core</AssemblyTitle>
-    <VersionPrefix>1.1.15</VersionPrefix>
     <Authors>Joseph Albahari;Tomas Petricek;Scott Smith;Tuomas Hietanen;Stef Heyenrath</Authors>
-    <TargetFrameworks>net35;net40;net45;portable-net40+win8+wpa81+wp8+sl5;portable-net45+win8+wpa81+wp8;uap10.0;netstandard1.3;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>net35;net40;net45;portable-net40+win8+wpa81+wp8+sl5;portable-net45+win8+wpa81+wp8;uap10.0;netstandard1.3;netstandard2.0;netstandard2.1</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <AssemblyName>LinqKit.Core</AssemblyName>
     <RootNamespace>LinqKit</RootNamespace>
@@ -16,13 +17,17 @@
     <PackageTags>linq;EF;EntityFramework;Entity;Framework;EntityFrameworkCore</PackageTags>
     <PackageReleaseNotes>See ReleaseNotes.md</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/scottksmith95/LINQKit</PackageProjectUrl>
-    <PackageLicenseUrl>https://raw.githubusercontent.com/scottksmith95/LINQKit/master/license.txt</PackageLicenseUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>https://github.com/scottksmith95/LINQKit</RepositoryUrl>
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
     <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
     <DefineConstants>$(DefineConstants);NOEF</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(TargetFramework)' != 'portable-net40+win8+wpa81+wp8+sl5' ">
+    <!-- error CS0122: 'AssemblyMetadataAttribute' is inaccessible due to its protection level -->
+    <RepositoryUrl>https://github.com/scottksmith95/LINQKit</RepositoryUrl>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
@@ -41,8 +46,7 @@
     <PackageReference Include="JetBrains.Annotations" Version="10.0.0">
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="AsyncBridge" Version="0.1.1" />
-    <!--<PackageReference Include="Microsoft.Bcl.Async" Version="1.0.168" />-->
+    <PackageReference Include="AsyncBridge" Version="0.3.1" />
     <Reference Include="System" />
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
@@ -87,7 +91,7 @@
     <PackageReference Include="System.Threading.Tasks" Version="4.3.0" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' or '$(TargetFramework)' == 'netstandard2.1' ">
     <PackageReference Include="JetBrains.Annotations" Version="10.4.0">
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>
@@ -114,7 +118,7 @@
     <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
     <NugetTargetMoniker>UAP,Version=v10.0</NugetTargetMoniker>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
+    <TargetPlatformVersion>10.0.18362.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
     <TargetFrameworkIdentifier>.NETCore</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
@@ -130,7 +134,7 @@
     <NugetTargetMoniker>.NETPortable,Version=v0.0,Profile=Profile328</NugetTargetMoniker>
     <LanguageTargets>$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets</LanguageTargets>
   </PropertyGroup>
-  
+
   <PropertyGroup Condition="'$(TargetFramework)' == 'portable-net45+win8+wpa81+wp8'">
     <DefineConstants>$(DefineConstants);PORTABLE</DefineConstants>
     <TargetFrameworkIdentifier>.NETPortable</TargetFrameworkIdentifier>

@@ -28,6 +28,9 @@ namespace Demo
             TestExpressionCombiner();
 
             Console.WriteLine();
+            TestExpandableAttribute();
+
+            Console.WriteLine();
             Console.WriteLine("Done, press any key to quit.");
             Console.ReadKey();
         }
@@ -51,9 +54,7 @@ namespace Demo
                 select new
                 {
                     c.Name,
-                    FilteredPurchases =
-                        from p in c.Purchases.Where(purchasePredicate.Compile())
-                        select p.Price
+                    FilteredPurchases = from p in c.Purchases.Where(purchasePredicate.Compile()) select p.Price
                 };
 
             foreach (var customerResult in query)
@@ -86,16 +87,16 @@ namespace Demo
                 select new
                 {
                     c.Name,
-                    FilteredPurchases =
-                        from p in custPurchases.Where(purchasePredicate)
-                        select p.Price
+                    FilteredPurchases = from p in custPurchases.Where(purchasePredicate) select p.Price
                 };
 
             foreach (var customerResult in query)
             {
                 Console.WriteLine(customerResult.Name);
                 foreach (decimal price in customerResult.FilteredPurchases)
+                {
                     Console.WriteLine("   $" + price);
+                }
             }
         }
 
@@ -108,27 +109,26 @@ namespace Demo
 
             // Here we're including the purchasePredicate in the filteredPurchases expression. 
             // We can combine lambda expressions by calling Invoke() on the variable
-            // expresssion.  The AsExpandable() wrapper then strips out the call to Invoke
+            // expression.  The AsExpandable() wrapper then strips out the call to Invoke
             // and emits one clean expression:
 
             var query =
                 from c in data.Customers.AsExpandable()
-                let filteredPurchases = data.Purchases.Where(
-                    p => p.CustomerID == c.ID && purchasePredicate.Invoke(p))
+                let filteredPurchases = data.Purchases.Where(p => p.CustomerID == c.ID && purchasePredicate.Invoke(p))
                 where filteredPurchases.Any()
                 select new
                 {
                     c.Name,
-                    FilteredPurchases =
-                        from p in filteredPurchases
-                        select p.Price
+                    FilteredPurchases = from p in filteredPurchases select p.Price
                 };
 
             foreach (var customerResult in query)
             {
                 Console.WriteLine(customerResult.Name);
                 foreach (decimal price in customerResult.FilteredPurchases)
+                {
                     Console.WriteLine("   $" + price);
+                }
             }
         }
 
@@ -155,6 +155,39 @@ namespace Demo
 
             // or call AsExpandable() on the Table:
             query = data.Purchases.AsExpandable().Where(criteria2);
+            Console.WriteLine("Count: " + query.Count());
+        }
+
+        [Expandable]
+        static bool PriceGreaterThanOrContains(decimal price, decimal value, string str)
+        {
+            if (_priceGreaterThanOrContains == null)
+            {
+                _priceGreaterThanOrContains = PriceGreaterThanOrContains().Compile();
+            }
+
+            return _priceGreaterThanOrContains(price, value, str);
+        }
+
+        static Func<decimal, decimal, string, bool> _priceGreaterThanOrContains;
+
+        static Expression<Func<decimal, decimal, string, bool>> PriceGreaterThanOrContains()
+        {
+            return (price, value, str) => price > value || str.Contains("a");
+        }
+
+        /// <summary>
+        /// A simple example of how to use Expandable methods.
+        /// </summary>
+        static void TestExpandableAttribute()
+        {
+            var data = new DemoData();
+
+            var query = data.Purchases.AsExpandable();
+            Console.WriteLine("Count no filter: " + query.Count());
+
+            // use ExpandableAttribute on the method 
+            query = data.Purchases.AsExpandable().Where(p => PriceGreaterThanOrContains(p.Price, 1000, p.Description));
             Console.WriteLine("Count: " + query.Count());
         }
     }
